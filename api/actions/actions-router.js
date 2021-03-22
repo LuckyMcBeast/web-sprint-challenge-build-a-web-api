@@ -68,7 +68,7 @@ router.put('/:id', (req, res) => {
 
     if (!changes.project_id || !changes.description || !changes.notes) {
         res.status(400).json({
-            message: "New actions must include project_id, description, and notes"
+            message: "Actions must include project_id, description, and notes"
         })
     }
     else{ 
