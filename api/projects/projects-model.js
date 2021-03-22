@@ -52,7 +52,7 @@ function remove(id) {
   return db("projects")
     .where("id", id)
     .del();
-}
+} 
 
 function getProjectActions(projectId) {
   return db("actions")

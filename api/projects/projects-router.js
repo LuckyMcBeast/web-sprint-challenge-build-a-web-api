@@ -61,7 +61,7 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     const changes = req.body;
 
     if (!changes.name || !changes.description) {
@@ -82,7 +82,7 @@ router.put('/:id', (req, res) => {
 
 })
 
-router.delete('/:id' , async (req, res) => {
+router.delete('/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const project = await Projects.remove(id);
@@ -96,6 +96,24 @@ router.delete('/:id' , async (req, res) => {
     catch (err) {
         res.status(500).json({ message: `Project could not be removed.`, error: err.message })
     }
+})
+
+router.get('/:id/actions', (req, res) => {
+    const { id } = req.params;
+
+    Projects.getProjectActions(id)
+        .then(actions => {
+            if (!actions) {
+                res.status(404).json([])
+            }
+            else {
+                res.status(200).json(actions);
+            }
+        }) 
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ message: "The actions information could not be retrieved" })
+        })
 })
 
 module.exports = router;
