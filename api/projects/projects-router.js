@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const Projects = require('./projects-model');
 
+//Wanted to create custom middleware but ran out of time. Should have started with this and will in the future
+
 router.get('/', (req, res) => {
     Projects.get()
         .then(projects => {
